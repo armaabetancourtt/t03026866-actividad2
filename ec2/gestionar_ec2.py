@@ -29,15 +29,22 @@ def main():
 
     if accion == "listar":
         listar_instancias(ec2)
-    elif accion == "iniciar":
+
+    elif accion in ["iniciar", "detener", "terminar"]:
+        if len(sys.argv) < 3:
+            print("Falta instance_id")
+            sys.exit(1)
+
         instance_id = sys.argv[2]
-        iniciar_instancia(ec2, instance_id)
-    elif accion == "detener":
-        instance_id = sys.argv[2]
-        detener_instancia(ec2, instance_id)
-    elif accion == "terminar":
-        instance_id = sys.argv[2]
-        terminar_instancia(ec2, instance_id)
+
+        if accion == "iniciar":
+            iniciar_instancia(ec2, instance_id)
+        elif accion == "detener":
+            detener_instancia(ec2, instance_id)
+        elif accion == "terminar":
+            terminar_instancia(ec2, instance_id)
+    else:
+        print("Acción no válida")
 
 if __name__ == "__main__":
     main()
