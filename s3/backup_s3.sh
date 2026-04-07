@@ -36,4 +36,10 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-echo "[$FECHA] Subida exitosa a S3: $ARCHIVO" >> $LOG
+echo "[$FECHA] Backup realizado correctamente: $ARCHIVO" >> $LOG
+
+# Limpieza
+rm -f $ARCHIVO
+echo "[$FECHA] Archivo local eliminado: $ARCHIVO" >> $LOG
+
+echo "Backup fue completado correctamente"
