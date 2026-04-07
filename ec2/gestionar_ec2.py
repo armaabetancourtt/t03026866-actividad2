@@ -27,24 +27,28 @@ def main():
     accion = sys.argv[1]
     ec2 = boto3.client('ec2')
 
-    if accion == "listar":
-        listar_instancias(ec2)
+    try:
+        if accion == "listar":
+            listar_instancias(ec2)
 
-    elif accion in ["iniciar", "detener", "terminar"]:
-        if len(sys.argv) < 3:
-            print("Falta instance_id")
-            sys.exit(1)
+        elif accion in ["iniciar", "detener", "terminar"]:
+            if len(sys.argv) < 3:
+                print("Falta instance_id")
+                sys.exit(1)
 
-        instance_id = sys.argv[2]
+            instance_id = sys.argv[2]
 
-        if accion == "iniciar":
-            iniciar_instancia(ec2, instance_id)
-        elif accion == "detener":
-            detener_instancia(ec2, instance_id)
-        elif accion == "terminar":
-            terminar_instancia(ec2, instance_id)
-    else:
-        print("Acción no válida")
+            if accion == "iniciar":
+                iniciar_instancia(ec2, instance_id)
+            elif accion == "detener":
+                detener_instancia(ec2, instance_id)
+            elif accion == "terminar":
+                terminar_instancia(ec2, instance_id)
+        else:
+            print("Acción no válida")
+
+    except Exception as e:
+        print(f"Error: {e}")
 
 if __name__ == "__main__":
     main()
