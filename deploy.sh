@@ -10,3 +10,10 @@ if [ -z "$ACTION" ] || [ -z "$INSTANCE_ID" ]; then
 fi
 
 python3 ec2/gestionar_ec2.py $ACTION $INSTANCE_ID
+
+if [ -z "$ACTION" ] || [ -z "$INSTANCE_ID" ] || [ -z "$DIRECTORY" ] || [ -z "$BUCKET" ]; then
+    echo "Uso: ./deploy.sh <accion> <instance_id> <directorio> <bucket>"
+    exit 1
+fi
+
+bash s3/backup_s3.sh $DIRECTORY $BUCKET
