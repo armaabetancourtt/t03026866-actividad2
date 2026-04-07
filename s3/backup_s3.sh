@@ -28,4 +28,12 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-echo "[$FECHA] Compresión exitosa: $ARCHIVO" >> $LOG
+aws s3 cp $ARCHIVO s3://$BUCKET/
+
+if [ $? -ne 0 ]; then
+  echo "Error al subir a S3"
+  echo "[$FECHA] Error al subir $ARCHIVO a S3" >> $LOG
+  exit 1
+fi
+
+echo "[$FECHA] Subida exitosa a S3: $ARCHIVO" >> $LOG
