@@ -11,6 +11,14 @@ def iniciar_instancia(ec2, instance_id):
     ec2.start_instances(InstanceIds=[instance_id])
     print(f"Iniciando instancia {instance_id}")
 
+def detener_instancia(ec2, instance_id):
+    ec2.stop_instances(InstanceIds=[instance_id])
+    print(f"Deteniendo instancia {instance_id}")
+
+def terminar_instancia(ec2, instance_id):
+    ec2.terminate_instances(InstanceIds=[instance_id])
+    print(f"Terminando instancia {instance_id}")
+
 def main():
     if len(sys.argv) < 2:
         print("Uso: python gestionar_ec2.py <accion> [instance_id]")
@@ -24,6 +32,12 @@ def main():
     elif accion == "iniciar":
         instance_id = sys.argv[2]
         iniciar_instancia(ec2, instance_id)
+    elif accion == "detener":
+        instance_id = sys.argv[2]
+        detener_instancia(ec2, instance_id)
+    elif accion == "terminar":
+        instance_id = sys.argv[2]
+        terminar_instancia(ec2, instance_id)
 
 if __name__ == "__main__":
     main()
