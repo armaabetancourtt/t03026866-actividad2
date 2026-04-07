@@ -20,3 +20,12 @@ if [ ! -d "$DIRECTORIO" ]; then
   exit 1
 fi
 
+tar -czf $ARCHIVO $DIRECTORIO
+
+if [ $? -ne 0 ]; then
+  echo "Error al comprimir"
+  echo "[$FECHA] Error al comprimir $DIRECTORIO" >> $LOG
+  exit 1
+fi
+
+echo "[$FECHA] Compresión exitosa: $ARCHIVO" >> $LOG
