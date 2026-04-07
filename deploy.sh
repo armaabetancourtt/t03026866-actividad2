@@ -1,0 +1,5 @@
+#!/bin/bash
+ACTION=$1
+INSTANCE_ID=$2
+DIRECTORY=$3
+BUCKET=$4
